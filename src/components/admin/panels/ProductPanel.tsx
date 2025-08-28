@@ -447,7 +447,7 @@ export default function ProductPanel() {
                         product.image_url.startsWith("/products/") ? (
                           <div className="relative h-12 w-12 rounded-md overflow-hidden border">
                             <Image
-                              src={`${apiUrl}${product.image_url}`}
+                              src={`${apiUrl}/${product.image_url}`}
                               alt={product.title}
                               fill
                               className="object-cover"
@@ -644,7 +644,7 @@ export default function ProductPanel() {
                   ) : editProduct.image_url ? (
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden border">
                       <Image
-                        src={`${apiUrl}${editProduct.image_url}`}
+                        src={`${apiUrl}/${editProduct.image_url}`}
                         alt="Product"
                         className="absolute inset-0 w-full h-full object-cover"
                       />
