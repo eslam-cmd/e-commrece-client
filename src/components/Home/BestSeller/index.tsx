@@ -1,19 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SingleItem from "./SingleItem";
 import Image from "next/image";
 import Link from "next/link";
 import { product } from "@/types/product";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // أيقونات احترافية
 
 const BestSeller = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [products, setProducts] = useState<product[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const apiUrl = "https://e-commrece-backend.vercel.app";
 
   const filteredItems =
     activeFilter === "all"
       ? products
       : products.filter((item) => item.category === activeFilter);
-  const apiUrl =  "https://e-commrece-backend.vercel.app";
 
   useEffect(() => {
     fetch(`${apiUrl}/api/products?section=bestSeller`)
@@ -38,8 +40,17 @@ const BestSeller = () => {
       });
   }, []);
 
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -300 : 300,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <section className="overflow-hidden">
+    <section className="overflow-hidden relative">
       <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
         {/* العنوان */}
         <div className="mb-10 flex items-center justify-between flex-wrap gap-4">
@@ -62,10 +73,7 @@ const BestSeller = () => {
           <div className="flex flex-wrap gap-2">
             {[
               { key: "all", label: "All" },
-              {
-                key: "nutritionalsupplements",
-                label: "Nutritional supplements",
-              },
+              { key: "nutritionalsupplements", label: "Nutritional supplements" },
               { key: "vitamin", label: "Vitamin" },
               { key: "proten", label: "Proten" },
               { key: "creatin", label: "Creatin" },
@@ -86,10 +94,30 @@ const BestSeller = () => {
           </div>
         </div>
 
-        {/* عرض المنتجات */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7.5">
+        {/* أزرار التمرير */}
+        <button
+          onClick={() => scroll("left")}
+          className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full hover:bg-gray-100 z-10"
+        >
+          <FiChevronLeft size={20} />
+        </button>
+        <button
+          onClick={() => scroll("right")}
+          className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full hover:bg-gray-100 z-10"
+        >
+          <FiChevronRight size={20} />
+        </button>
+
+        {/* عرض المنتجات كسكرول أفقي */}
+        <div
+          ref={scrollRef}
+          className="flex gap-7.5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4"
+          style={{ scrollbarWidth: "none" }}
+        >
           {filteredItems.map((item) => (
-            <SingleItem key={item.id} item={item} />
+            <div key={item.id} className="snap-start flex-shrink-0 w-72">
+              <SingleItem item={item} />
+            </div>
           ))}
         </div>
 

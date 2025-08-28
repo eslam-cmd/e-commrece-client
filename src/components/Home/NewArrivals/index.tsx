@@ -15,6 +15,8 @@ import {
   FiShoppingCart,
   FiStar,
   FiClock,
+  FiChevronLeft,
+  FiChevronRight,
 } from "react-icons/fi";
 
 type ProductType = {
@@ -32,7 +34,7 @@ const NewArrival = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const apiUrl =  "https://e-commrece-backend.vercel.app";
+  const apiUrl = "https://e-commrece-backend.vercel.app";
 
   const categories = [
     { key: "all", label: "All" },
@@ -68,7 +70,7 @@ const NewArrival = () => {
       : products.filter((item) => item.category === activeCategory);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
@@ -92,7 +94,7 @@ const NewArrival = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center ${
                   activeCategory === key
                     ? "bg-blue-dark text-white shadow-md"
-                    : "bg-white text-gray-7 hover:bg-gray-100 border border-gray-200"
+                    : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
                 }`}
               >
                 {label}
@@ -101,20 +103,53 @@ const NewArrival = () => {
           </div>
         </div>
 
-        {/* Products Grid */}
+        {/* Products Scroll */}
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredProducts.map((item) => (
-              <ProductCard key={item.id} item={item} />
-            ))}
+          <div className="relative">
+            {/* زر يسار */}
+            <button
+              onClick={() =>
+                document
+                  .getElementById("newArrivalScroll")
+                  ?.scrollBy({ left: -300, behavior: "smooth" })
+              }
+              className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full hover:bg-gray-100 z-10"
+            >
+              <FiChevronLeft size={20} />
+            </button>
+
+            {/* الحاوية */}
+            <div
+              id="newArrivalScroll"
+              className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4"
+              style={{ scrollbarWidth: "none" }}
+            >
+              {filteredProducts.map((item) => (
+                <div key={item.id} className="snap-start flex-shrink-0 w-72">
+                  <ProductCard item={item} />
+                </div>
+              ))}
+            </div>
+
+            {/* زر يمين */}
+            <button
+              onClick={() =>
+                document
+                  .getElementById("newArrivalScroll")
+                  ?.scrollBy({ left: 300, behavior: "smooth" })
+              }
+              className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md p-2 rounded-full hover:bg-gray-100 z-10"
+            >
+              <FiChevronRight size={20} />
+            </button>
           </div>
         ) : (
           <div className="text-center py-12 bg-white rounded-xl shadow-sm">
-            <p className="text-gray-7">
+            <p className="text-gray-700">
               No products available in this category at the moment
             </p>
           </div>
@@ -127,7 +162,7 @@ const NewArrival = () => {
 const ProductCard = ({ item }: { item: ProductType }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { openModal } = useModalContext();
-
+  const apiUrl = "https://e-commrece-backend.vercel.app";
 
   const handleQuickView = () => {
     dispatch(
@@ -159,7 +194,6 @@ const ProductCard = ({ item }: { item: ProductType }) => {
       })
     );
   };
-const apiUrl = 'https://e-commrece-backend.vercel.app';
 
   const handleAddToWishlist = () => {
     dispatch(
@@ -186,33 +220,34 @@ const apiUrl = 'https://e-commrece-backend.vercel.app';
 
       {/* Product Image */}
       <div className="relative h-60 w-full bg-gray-50 flex items-center justify-center overflow-hidden">
-      {item.image_url?.startsWith("/products/") ? (
-  <Image
-    src={`${apiUrl}${item.image_url}`}
-    alt={item.title}
-    width={300}
-    height={300}
-  />
-) : (
-  <Image
-    src={item.image_url || "/fallback.jpg"}
-    alt={item.title}
-    width={300}
-    height={300}
-  />
-)}
+        {item.image_url?.startsWith("/products/") ? (
+          <Image
+            src={`${apiUrl}${item.image_url}`}
+            alt={item.title}
+            width={300}
+            height={300}
+          />
+        ) : (
+          <Image
+            src={item.image_url || "/fallback.jpg"}
+            alt={item.title}
+            width={300}
+            height={300}
+          />
+        )}
 
         {/* Quick Actions */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-5 transition-all duration-300 flex items-center justify-center gap-3">
           <button
             onClick={handleQuickView}
-            className="bg-white text-gray-7 hover:bg-blue-dark hover:text-white p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 opacity-0 group-hover:opacity-100"
+            className="bg-white text-gray-700 hover:bg-blue-dark hover:text-white p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 opacity-0 group-hover:opacity-100"
             aria-label="Quick view"
           >
             <FiEye size={18} />
           </button>
           <button
             onClick={handleAddToWishlist}
+          
             className="bg-white text-gray-7 hover:bg-red-dark hover:text-white p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 opacity-0 group-hover:opacity-100"
             aria-label="Add to wishlist"
           >
