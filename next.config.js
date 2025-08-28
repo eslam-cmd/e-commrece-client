@@ -1,21 +1,24 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: [
-      "www.sporter.com",
-      "localhost",
-      "e-commrece-backend.vercel.app"
-    ],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "www.sporter.com",
-        pathname: "/media/catalog/product/**",
+        pathname: "/media/catalog/product/",
+      },
+      {
+        protocol: "https",
+        hostname: "doxfhxflhtbwmdjtwfye.supabase.co",
+        pathname: "/storage/v1/object/public/image/**",
       },
       {
         protocol: "https",
         hostname: "e-commrece-backend.vercel.app",
-        pathname: "/products/**",
+        pathname: "/products/",
       },
     ],
   },
 };
+
+module.exports = nextConfig;

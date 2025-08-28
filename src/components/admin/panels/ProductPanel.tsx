@@ -25,7 +25,7 @@ export default function ProductPanel() {
     setMessage(text);
     setTimeout(() => setMessage(null), 3000);
   };
-  const apiUrl =  "https://e-commrece-backend.vercel.app";
+  const apiUrl = "https://e-commrece-backend.vercel.app";
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
@@ -118,7 +118,7 @@ export default function ProductPanel() {
 
     setIsLoading(true);
     try {
-      await fetch(`${apiUrl}/${id}`, {
+      await fetch(`${apiUrl}/api/products/${id}`, {
         method: "DELETE",
       });
       setProducts((prev) => prev.filter((p) => p.id !== id));
@@ -443,11 +443,18 @@ export default function ProductPanel() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {product.image_url &&
-                        typeof product.image_url === "string" &&
-                        product.image_url.startsWith("/products/") ? (
+                        typeof product.image_url === "string" ? (
                           <div className="relative h-12 w-12 rounded-md overflow-hidden border">
                             <Image
-                              src={`${apiUrl}/${product.image_url}`}
+                              src={
+                                product.image_url.startsWith("http")
+                                  ? product.image_url
+                                  : `${apiUrl}${
+                                      product.image_url.startsWith("/")
+                                        ? product.image_url
+                                        : `/${product.image_url}`
+                                    }`
+                              }
                               alt={product.title}
                               fill
                               className="object-cover"
@@ -455,7 +462,9 @@ export default function ProductPanel() {
                             />
                           </div>
                         ) : (
-                          <span className="text-xs text-gray-7">No image</span>
+                          <span className="text-xs text-gray-700">
+                            No image
+                          </span>
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-6">

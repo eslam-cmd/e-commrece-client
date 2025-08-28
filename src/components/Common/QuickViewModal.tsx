@@ -19,7 +19,7 @@ const QuickViewModal = () => {
 
   // get the product data
   const product = useAppSelector((state) => state.quickViewReducer.value);
-  const apiUrl =  "https://e-commrece-backend.vercel.app";
+  const apiUrl = "https://e-commrece-backend.vercel.app";
 
   const [activePreview, setActivePreview] = useState(0);
 
@@ -98,8 +98,16 @@ const QuickViewModal = () => {
                   <div className="relative">
                     {product.image_url && (
                       <Image
-                        src={`${apiUrl}${product.image_url}`}
-                        alt={product.title}
+                        src={
+                          product.image_url?.startsWith("http")
+                            ? product.image_url // رابط كامل (Supabase أو خارجي)
+                            : `${apiUrl}${
+                                product.image_url?.startsWith("/")
+                                  ? product.image_url
+                                  : `/${product.image_url}`
+                              }` // رابط نسبي
+                        }
+                        alt={product.title || "Product"}
                         width={300}
                         height={300}
                       />

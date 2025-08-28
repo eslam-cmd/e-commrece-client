@@ -21,7 +21,7 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 const SingleItem = ({ item }: { item: product }) => {
   const { openModal } = useModalContext();
   const dispatch = useDispatch<AppDispatch>();
-  const apiUrl =  "https://e-commrece-backend.vercel.app";
+  const apiUrl = "https://e-commrece-backend.vercel.app";
   const handleQuickViewUpdate = () => {
     dispatch(
       updateQuickView({
@@ -89,14 +89,20 @@ const SingleItem = ({ item }: { item: product }) => {
         </div>
       )}
       <div className="relative w-full h-60 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center overflow-hidden">
-        {typeof item.image_url === "string" &&
-        item.image_url.startsWith("/products/") ? (
+        {typeof item.image_url === "string" ? (
           <Image
-            src={`${apiUrl}${item.image_url}`}
+            src={
+              item.image_url.startsWith("http")
+                ? item.image_url // رابط كامل من قاعدة البيانات
+                : `${apiUrl}${
+                    item.image_url.startsWith("/")
+                      ? item.image_url
+                      : `/${item.image_url}`
+                  }`
+            }
             alt={item.title}
-            width={400}
-            height={400}
-            className="object-contain transition-transform duration-500 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (

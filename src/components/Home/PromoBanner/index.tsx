@@ -30,7 +30,7 @@ const PromoBanner = () => {
           {/* الصورة */}
           <div className="relative w-full max-w-[250px] sm:max-w-[274px] mx-auto lg:mx-0 mt-6 lg:mt-0">
             <Image
-              src="https://www.sporter.com/media/catalog/product/1/0/101529-newup24.jpg"
+              src="/images/cart/1.png"
               alt="Banner"
               width={274}
               height={350}
@@ -45,7 +45,7 @@ const PromoBanner = () => {
           <div className="relative z-10 overflow-hidden rounded-lg bg-white p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between gap-4 sm:gap-6 shadow-sm border border-gray-200 text-center sm:text-right">
             <div className="relative w-[180px] sm:w-[220px] md:w-[250px] flex-shrink-0">
               <Image
-                src="https://www.sporter.com/media/catalog/product/1/0/101529-newup24.jpg"
+                src="/images/cart/2.png"
                 alt="Banner"
                 width={274}
                 height={350}
@@ -73,10 +73,10 @@ const PromoBanner = () => {
           </div>
 
           {/* Banner 2 */}
-          <div className="relative z-10 overflow-hidden rounded-lg bg-white p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between gap-4 sm:gap-6 shadow-sm border border-gray-200 text-center sm:text-left">
-            <div className="w-[160px] sm:w-[200px] flex-shrink-0">
+          <div className="relative z-10 overflow-hidden rounded-lg bg-white p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between gap-4 sm:gap-6 shadow-sm border border-gray-200 text-center sm:text-right">
+            <div className="relative w-[180px] sm:w-[220px] md:w-[250px] flex-shrink-0">
               <Image
-                src="https://www.sporter.com/media/catalog/product/f/r/front-br-png_1.jpg"
+                src="/images/cart/3.png"
                 alt="Banner"
                 width={274}
                 height={350}

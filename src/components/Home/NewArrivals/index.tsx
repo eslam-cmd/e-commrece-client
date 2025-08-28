@@ -224,15 +224,15 @@ const ProductCard = ({ item }: { item: ProductType }) => {
           <Image
             src={`${apiUrl}${item.image_url}`}
             alt={item.title}
-            width={300}
-            height={300}
+            fill
+            className="object-cover" // غطي المساحة كلها مع قص الزائد
           />
         ) : (
           <Image
-            src={item.image_url || "/fallback.jpg"}
+            src={item.image_url}
             alt={item.title}
-            width={300}
-            height={300}
+            fill
+            className="object-cover"
           />
         )}
 
@@ -247,7 +247,6 @@ const ProductCard = ({ item }: { item: ProductType }) => {
           </button>
           <button
             onClick={handleAddToWishlist}
-          
             className="bg-white text-gray-7 hover:bg-red-dark hover:text-white p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 opacity-0 group-hover:opacity-100"
             aria-label="Add to wishlist"
           >
