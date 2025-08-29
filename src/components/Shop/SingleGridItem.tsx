@@ -50,7 +50,7 @@ const SingleGridItem = ({ item }: { item: product }) => {
         {typeof item.image_url === "string" &&
         item.image_url.startsWith("/products/") ? (
           <Image
-            src={`${apiUrl}${item.image_url}`}
+            src={`https://e-commrece-backend.vercel.app/${item.image_url}`}
             alt={item.title}
             width={400}
             height={400}

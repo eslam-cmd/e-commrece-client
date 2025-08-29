@@ -18,7 +18,7 @@ const BestSeller = () => {
       : products.filter((item) => item.category === activeFilter);
 
   useEffect(() => {
-    fetch(`${apiUrl}/api/products?section=bestSeller`)
+    fetch(`https://e-commrece-backend.vercel.app/api/products?section=bestSeller`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

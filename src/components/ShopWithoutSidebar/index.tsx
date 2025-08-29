@@ -26,7 +26,7 @@ const ShopWithoutSidebar = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${apiUrl}/api/products`);
+        const response = await fetch(`https://e-commrece-backend.vercel.app/api/products`);
         const data = await response.json();
 
         if (Array.isArray(data)) {

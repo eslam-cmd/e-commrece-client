@@ -94,7 +94,7 @@ const SingleItem = ({ item }: { item: product }) => {
             src={
               item.image_url.startsWith("http")
                 ? item.image_url // رابط كامل من قاعدة البيانات
-                : `${apiUrl}${
+                : `https://e-commrece-backend.vercel.app/${
                     item.image_url.startsWith("/")
                       ? item.image_url
                       : `/${item.image_url}`

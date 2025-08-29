@@ -24,7 +24,7 @@ export default function UsersPanel() {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${apiUrl}/api/auth-users`);
+        const response = await fetch(`https://e-commrece-backend.vercel.app/api/auth-users`);
         const data = await response.json();
         setUsers(Array.isArray(data) ? data : []);
       } catch (error) {
@@ -49,7 +49,7 @@ export default function UsersPanel() {
     try {
       setDeleteLoading(id);
       const response = await fetch(
-        `${apiUrl}/api/auth-users/${id}`,
+        `https://e-commrece-backend.vercel.app/api/auth-users/${id}`,
         {
           method: "DELETE",
         }

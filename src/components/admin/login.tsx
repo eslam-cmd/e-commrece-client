@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${apiUrl}/api/auth/admin_login`, {
+      const res = await fetch(`https://e-commrece-backend.vercel.app/api/auth/admin_login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

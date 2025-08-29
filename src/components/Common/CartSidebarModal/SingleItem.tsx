@@ -15,7 +15,7 @@ const SingleItem = ({ item, removeItemFromCart }) => {
   // ✅ تعريف imageSrc قبل الاستخدام
   const imageSrc = item.image_url?.startsWith("http")
     ? item.image_url
-    : `${apiUrl}${
+    : `https://e-commrece-backend.vercel.app/${
         item.image_url?.startsWith("/") ? item.image_url : `/${item.image_url}`
       }`;
 

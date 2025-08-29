@@ -23,7 +23,7 @@ const Signin = () => {
     const apiUrl = "https://e-commrece-backend.vercel.app";
 
     try {
-      const res = await fetch(`${apiUrl}/api/auth/login`, {
+      const res = await fetch(`https://e-commrece-backend.vercel.app/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

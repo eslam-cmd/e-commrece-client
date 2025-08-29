@@ -101,7 +101,7 @@ const QuickViewModal = () => {
                         src={
                           product.image_url?.startsWith("http")
                             ? product.image_url // رابط كامل (Supabase أو خارجي)
-                            : `${apiUrl}${
+                            : `https://e-commrece-backend.vercel.app/${
                                 product.image_url?.startsWith("/")
                                   ? product.image_url
                                   : `/${product.image_url}`

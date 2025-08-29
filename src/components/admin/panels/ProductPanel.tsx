@@ -30,7 +30,7 @@ export default function ProductPanel() {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`${apiUrl}/api/products`);
+        const res = await fetch(`https://e-commrece-backend.vercel.app/api/products`);
         const data = await res.json();
         if (Array.isArray(data)) {
           setProducts(data.filter(Boolean));
@@ -62,7 +62,7 @@ export default function ProductPanel() {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch(`${apiUrl}/api/products`, {
+      const res = await fetch(`https://e-commrece-backend.vercel.app/api/products`, {
         method: "POST",
         body: formData,
       });
@@ -91,7 +91,7 @@ export default function ProductPanel() {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch(`${apiUrl}/${editProduct.id}`, {
+      const res = await fetch(`https://e-commrece-backend.vercel.app/${editProduct.id}`, {
         method: "PUT",
         body: formData,
       });
@@ -118,7 +118,7 @@ export default function ProductPanel() {
 
     setIsLoading(true);
     try {
-      await fetch(`${apiUrl}/api/products/${id}`, {
+      await fetch(`https://e-commrece-backend.vercel.app/api/products/${id}`, {
         method: "DELETE",
       });
       setProducts((prev) => prev.filter((p) => p.id !== id));
@@ -449,7 +449,7 @@ export default function ProductPanel() {
                               src={
                                 product.image_url.startsWith("http")
                                   ? product.image_url
-                                  : `${apiUrl}${
+                                  : `https://e-commrece-backend.vercel.app/${
                                       product.image_url.startsWith("/")
                                         ? product.image_url
                                         : `/${product.image_url}`
@@ -653,7 +653,7 @@ export default function ProductPanel() {
                   ) : editProduct.image_url ? (
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden border">
                       <Image
-                        src={`${apiUrl}/${editProduct.image_url}`}
+                        src={`https://e-commrece-backend.vercel.app/${editProduct.image_url}`}
                         alt="Product"
                         className="absolute inset-0 w-full h-full object-cover"
                       />

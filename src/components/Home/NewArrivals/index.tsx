@@ -50,7 +50,7 @@ const NewArrival = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `${apiUrl}/api/products?section=newArrival`
+          `https://e-commrece-backend.vercel.app/api/products?section=newArrival`
         );
         const data = await response.json();
         setProducts(Array.isArray(data) ? data : []);
@@ -222,7 +222,7 @@ const ProductCard = ({ item }: { item: ProductType }) => {
       <div className="relative h-60 w-full bg-gray-50 flex items-center justify-center overflow-hidden">
         {item.image_url?.startsWith("/products/") ? (
           <Image
-            src={`${apiUrl}${item.image_url}`}
+            src={`https://e-commrece-backend.vercel.app/${item.image_url}`}
             alt={item.title}
             fill
             className="object-cover" // غطي المساحة كلها مع قص الزائد
