@@ -85,6 +85,34 @@ const Hero = () => {
                   />
                 </div>
               </div>
+               <div className="w-full relative rounded-[10px] bg-white p-4 sm:p-6 flex items-center justify-between">
+                <div className="flex-1">
+                  <h2 className="font-semibold text-dark text-lg sm:text-xl mb-4 sm:mb-6">
+                    <a href="#">Lorem ipsum.</a>
+                  </h2>
+                  <p className="font-medium text-dark-4 text-sm sm:text-base mb-1.5">
+                    Lorem ipsum dolor sit, amet.
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium text-lg sm:text-xl text-red">
+                      $699
+                    </span>
+                    <span className="font-medium text-base sm:text-lg text-dark-4 line-through">
+                      $999
+                    </span>
+                  </div>
+                </div>
+                <div className="flex-shrink-0">
+                  <Image
+                    src="https://www.sporter.com/media/catalog/product/f/r/front-daily-multivitamins.jpg"
+                    alt="product"
+                    width={110}
+                    height={140}
+                    className="object-contain"
+                    unoptimized
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

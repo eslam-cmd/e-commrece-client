@@ -5,7 +5,6 @@ import { useModalContext } from "@/app/context/QuickViewModalContext";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { updateQuickView } from "@/redux/features/quickView-slice";
-import { addItemToCart } from "@/redux/features/cart-slice";
 import { addItemToWishlist } from "@/redux/features/wishlist-slice";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +16,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import { addItemToCart } from "@/redux/features/cart-slice";
 
 const SingleItem = ({ item }: { item: product }) => {
   const { openModal } = useModalContext();

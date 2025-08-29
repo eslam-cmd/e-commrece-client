@@ -115,6 +115,8 @@ const MyAccount = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole");
     router.push("/signin");
   };
 

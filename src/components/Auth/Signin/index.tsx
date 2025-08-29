@@ -20,8 +20,7 @@ const Signin = () => {
     setErrorMsg("");
     setSuccessMsg("");
     setIsLoading(true);
-const apiUrl =  "https://e-commrece-backend.vercel.app";
-
+    const apiUrl = "https://e-commrece-backend.vercel.app";
 
     try {
       const res = await fetch(`${apiUrl}/api/auth/login`, {
@@ -34,17 +33,19 @@ const apiUrl =  "https://e-commrece-backend.vercel.app";
 
       if (!res.ok) throw new Error(result.error || "Login failed");
 
-      // Store user data
+      // حفظ بيانات المستخدم
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userEmail", result.user.email);
       localStorage.setItem("userRole", result.user.role || "user");
+      localStorage.setItem("userId", result.user.id);
 
       setSuccessMsg("Login successful! Redirecting...");
 
+      // الانتقال للصفحة الرئيسية مع إعادة تحميل كاملة
       setTimeout(() => {
-        router.push("/mail-success");
-        setTimeout(() => window.location.reload(), 500);
-      }, 1500);
+        router.replace("/"); // الانتقال
+        window.location.reload(); // إعادة تحميل
+      }, 1000);
     } catch (err: any) {
       setErrorMsg(err.message || "An error occurred");
     } finally {

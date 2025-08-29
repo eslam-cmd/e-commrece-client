@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CustomSelect from "./CustomSelect";
-import { useAppSelector } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { selectTotalPrice } from "@/redux/features/cart-slice";
+import { useAppSelector } from "@/redux/store";
 import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
 
 // MUI Icons
@@ -28,7 +28,7 @@ const Header = () => {
   const [userRole, setUserRole] = useState<string | null>(null);
 
   const product = useAppSelector((state) => state.cartReducer.items);
-  const totalPrice = useSelector(selectTotalPrice);
+  const totalPrice = useAppSelector(selectTotalPrice);
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     const email = localStorage.getItem("userEmail");

@@ -13,28 +13,25 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const apiUrl = "https://e-commrece-backend.vercel.app";
-  console.log('الرابط المستخدم:', apiUrl);
+  console.log("الرابط المستخدم:", apiUrl);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const res = await fetch(
-        `${apiUrl}/api/auth/admin_login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const res = await fetch(`${apiUrl}/api/auth/admin_login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       const data = await res.json();
 
       if (data.success) {
-        // Save login data
+        // حفظ بيانات الدخول
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userEmail", email);
         localStorage.setItem("userRole", "admin");
@@ -42,11 +39,11 @@ export default function AdminLoginPage() {
 
         setMessage({ text: "Login successful!", type: "success" });
 
-        // Redirect after short delay
+        // الانتقال للوحة التحكم مع إعادة تحميل كاملة
         setTimeout(() => {
-          router.push("/dashboardadmin");
-          window.location.reload();
-        }, 1000);
+          router.replace("/dashboardadmin"); // الانتقال
+          window.location.reload(); // إعادة تحميل
+        }, 800);
       } else {
         setMessage({
           text: data.message || "Invalid login credentials",

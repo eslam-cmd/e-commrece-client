@@ -33,13 +33,14 @@ const Signup = () => {
     setError("");
     setSuccess("");
 
-    // Basic validation
+    // التحقق من تطابق كلمة المرور
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setLoading(false);
       return;
     }
-    const apiUrl =  "https://e-commrece-backend.vercel.app";
+
+    const apiUrl = "https://e-commrece-backend.vercel.app";
 
     try {
       const res = await fetch(`${apiUrl}/api/auth/signup`, {
@@ -56,18 +57,20 @@ const Signup = () => {
 
       if (!res.ok) throw new Error(data.message || "Registration failed");
 
-      // Store user data
+      // حفظ بيانات المستخدم
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userEmail", formData.email);
       localStorage.setItem("userFullName", formData.fullName);
       localStorage.setItem("userRole", "user");
+      localStorage.setItem("userId", data.user.id);
 
       setSuccess("Registration successful! Redirecting...");
 
+      // الانتقال للصفحة الرئيسية مع إعادة تحميل كاملة
       setTimeout(() => {
-        router.push("/");
-        window.location.reload();
-      }, 1500);
+        router.replace("/"); // الانتقال
+        window.location.reload(); // إعادة تحميل
+      }, 1000);
     } catch (err: any) {
       setError(err.message || "An error occurred during registration");
     } finally {
