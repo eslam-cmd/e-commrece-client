@@ -93,7 +93,7 @@ const MyAccount = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://e-commrece-backend.vercel.app/api/auth-users?email=${userEmail}`
+          `https://e-commrece-backend.vercel.app/api/users?email=${userEmail}`
         );
         const data = await response.json();
         const userData = Array.isArray(data) ? data[0] : data;
@@ -126,7 +126,7 @@ const MyAccount = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`https://e-commrece-backend.vercel.app/api/auth-users/${user.id}`, {
+      const response = await fetch(`https://e-commrece-backend.vercel.app/api/users/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
